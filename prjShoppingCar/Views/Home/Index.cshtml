@@ -1,0 +1,59 @@
+﻿@model IEnumerable<prjShoppingCar.Models.tProduct>
+
+@{
+    ViewBag.Title = "產品列表";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4">
+            <div class="thumbnail">
+                <img src="~/images/@item.fImg" style="width:70%" class="fImg">
+                <div class="caption">
+                    <h2 class="title">@item.fName</h2>
+                    <h3 class=" text-center text-danger">單價：<span class="fPrice">@item.fPrice</span></h3>
+
+                    <p>
+                        <select class="amount form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </p>
+                    <input type="hidden" value="@item.fPId" class="fPId"/>
+                    <p>
+                        <input type="button" value="加入購物車" class="add_cart btn btn-block btn-success"/>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section script{
+    <script>
+        //localStorage.getItem();
+       
+        var cart = [];
+        //先判斷有無舊有的購物車
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'));
+        }
+        $('.add_cart').click(function () {
+            let product = $(this).closest('.thumbnail')
+            let newItem = {
+                Pname: product.find('.title').text(),
+                Price: parseInt(product.find('.fPrice').text()),
+                amount: parseInt(product.find('.amount').val()),
+                fPId: product.find('.fPId').val(),
+                fImg: product.find('.fImg').attr('src')
+            }
+            console.log(newItem);
+
+            cart.push(newItem);
+            localStorage.setItem("cart", JSON.stringify(cart));
+        })
+    </script>
+}

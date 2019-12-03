@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "MyCart";
+}
+
+<h2>我的購物車</h2>
+<table class="table table-striped" id="cart">
+    <thead>
+        <tr>
+            <th>圖片</th>
+            <th>品名</th>
+            <th>單價</th>
+            <th>數量</th>
+            <th>小計</th>
+            <th>移除</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+        <tr>
+            <th colspan="6"><h3 id="total" class="text-danger"></h3></th>
+        </tr>
+        
+    </tfoot>
+</table>
+<a class="btn btn-info" id="upCart">更新購物車</a>
+<a class="btn btn-danger" id="clear">清空購物車</a>
+@section script{
+    <script>
+        var cart = [];
+        //先判斷有無舊有的購物車
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'));
+            setCart();
+        } else {
+            $('#cart>tbody').text('目前購物車沒有任何商品');
+        }
+
+
+        function setCart() {
+            var cartList = "", s_price = 0, total = 0;
+            for (var i = 0; i < cart.length; i++) {
+                s_price = cart[i]["Price"] * cart[i]["amount"];
+                total += s_price;
+                //以下寫法為新js寫法，可避免變數及字串間過多加號不易閱讀，變數範圍加上${}即可
+                cartList += `<tr><td><img src="${cart[i]["fImg"]}" style="width:100px"/></td><td>${cart[i]["Pname"]}</td><td>${cart[i]["Price"]}</td><td><input id="${cart[i]["fPId"]}" type="text" value="${cart[i]["amount"]}"/></td><td>${s_price}</td><td><button  class="btn btn-danger" id="${cart[i]["fPId"]}">刪除</button></td></tr>`;
+            }
+            $('#cart>tbody').empty().append(cartList);
+            $('#total').text('總金額 $'+total);
+        }
+        $('#cart').click(function (evt) {
+            if (evt.target.tagName == "BUTTON") {
+                if (confirm("確定移除此商品？")) {
+                    cart.splice(evt.target.id, 1);
+                    localStorage.setItem("cart", JSON.stringify(cart));
+
+                    setCart();
+                }
+            }
+        })
+        //重新計算數量及小計
+        $('#upCart').click(function () {
+            if (cart.length > 0) {
+                for (var i = 0; i < cart.length; i++) {
+                    cart[i]["amount"] = $('#' + cart[i]["fPId"]).val();
+                }
+                localStorage.setItem("cart", JSON.stringify(cart));
+                setCart();
+            }
+        })
+
+        //清除購物車
+        $('#clear').click(function () {
+            if (confirm("確定清空購物車？")) {
+                localStorage.clear();
+                $('#cart>tbody').empty();
+                $('#total').text('總金額 $0');
+            }
+        })
+    </script>
+}
