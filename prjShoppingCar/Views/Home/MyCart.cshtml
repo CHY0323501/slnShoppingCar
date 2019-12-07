@@ -1,6 +1,12 @@
 ﻿
 @{
     ViewBag.Title = "MyCart";
+
+    var OrderOK = 0;
+    if (TempData["Order"] !=null)
+    {
+        OrderOK = 1;
+    }
 }
 
 <h2>我的購物車</h2>
@@ -20,14 +26,25 @@
         <tr>
             <th colspan="6"><h3 id="total" class="text-danger"></h3></th>
         </tr>
-        
+
     </tfoot>
 </table>
 <a class="btn btn-info" id="upCart">更新購物車</a>
 <a class="btn btn-danger" id="clear">清空購物車</a>
+
+<a class="btn btn-danger" href="@Url.Action("Order","Home")">訂購</a>
+
+@*<input id="OrderOK" type="hidden" value="@TempData["Order"]"/>*@
+
 @section script{
     <script>
         var cart = [];
+        if (@OrderOK==1)
+        {
+            alert("結帳完成!!");
+            localStorage.removeItem('cart');
+        }
+        
         //先判斷有無舊有的購物車
         if (localStorage.getItem('cart')) {
             cart = JSON.parse(localStorage.getItem('cart'));
@@ -72,10 +89,13 @@
         //清除購物車
         $('#clear').click(function () {
             if (confirm("確定清空購物車？")) {
-                localStorage.clear();
+                localStorage.removeItem('cart');
                 $('#cart>tbody').empty();
                 $('#total').text('總金額 $0');
             }
         })
+
+
+        
     </script>
 }

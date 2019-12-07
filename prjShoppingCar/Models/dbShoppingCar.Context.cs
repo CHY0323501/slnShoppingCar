@@ -12,6 +12,8 @@ namespace prjShoppingCar.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class dbShoppingCarEntities : DbContext
     {
@@ -29,5 +31,22 @@ namespace prjShoppingCar.Models
         public virtual DbSet<tOrder> tOrder { get; set; }
         public virtual DbSet<tOrderDetail> tOrderDetail { get; set; }
         public virtual DbSet<tProduct> tProduct { get; set; }
+    
+        public virtual int Add_Order(string uid, string addr, string cart)
+        {
+            var uidParameter = uid != null ?
+                new ObjectParameter("Uid", uid) :
+                new ObjectParameter("Uid", typeof(string));
+    
+            var addrParameter = addr != null ?
+                new ObjectParameter("Addr", addr) :
+                new ObjectParameter("Addr", typeof(string));
+    
+            var cartParameter = cart != null ?
+                new ObjectParameter("cart", cart) :
+                new ObjectParameter("cart", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Add_Order", uidParameter, addrParameter, cartParameter);
+        }
     }
 }

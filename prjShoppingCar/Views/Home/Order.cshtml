@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "收件人資料";
+}
+
+<h2>收件人資料</h2>
+<form action="@Url.Action("Order")" method="post">
+    <div class="form-horizontal">
+        <hr />
+        <div class="form-group">
+            <span class="control-label col-md-2">收件人地址</span>
+            <div class="col-md-10">
+                <input type="text" id="fAddress" name="fAddress" required="required" class="form-control" />
+            </div>
+        </div>
+        <input id="data" name="data" type="hidden" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="結帳" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+@section script{
+    <script>
+        if (localStorage.getItem('cart')) {
+            $('#data').val(localStorage.getItem('cart'));
+        }
+        
+    </script>
+}

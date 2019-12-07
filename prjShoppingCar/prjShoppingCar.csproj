@@ -109,24 +109,24 @@
     <Content Include="images\iphone8.jpg" />
     <Content Include="images\ps4.jpg" />
     <Content Include="images\xboxone.jpg" />
-    <Content Include="Models\dbShoppingCart.Context.tt">
+    <Content Include="Models\dbShoppingCar.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbShoppingCart.edmx</DependentUpon>
-      <LastGenOutput>dbShoppingCart.Context.cs</LastGenOutput>
+      <DependentUpon>dbShoppingCar.edmx</DependentUpon>
+      <LastGenOutput>dbShoppingCar.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\dbShoppingCart.tt">
+    <Content Include="Models\dbShoppingCar.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbShoppingCart.edmx</DependentUpon>
-      <LastGenOutput>dbShoppingCart.cs</LastGenOutput>
+      <DependentUpon>dbShoppingCar.edmx</DependentUpon>
+      <LastGenOutput>dbShoppingCar.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\dbShoppingCart.edmx">
+    <EntityDeploy Include="Models\dbShoppingCar.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbShoppingCart.Designer.cs</LastGenOutput>
+      <LastGenOutput>dbShoppingCar.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\dbShoppingCart.edmx.diagram">
-      <DependentUpon>dbShoppingCart.edmx</DependentUpon>
+    <Content Include="Models\dbShoppingCar.edmx.diagram">
+      <DependentUpon>dbShoppingCar.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -142,32 +142,32 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbShoppingCart.Context.cs">
+    <Compile Include="Models\dbShoppingCar.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbShoppingCart.Context.tt</DependentUpon>
+      <DependentUpon>dbShoppingCar.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbShoppingCart.cs">
+    <Compile Include="Models\dbShoppingCar.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbShoppingCart.tt</DependentUpon>
+      <DependentUpon>dbShoppingCar.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbShoppingCart.Designer.cs">
+    <Compile Include="Models\dbShoppingCar.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>dbShoppingCart.edmx</DependentUpon>
+      <DependentUpon>dbShoppingCar.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\tMember.cs">
-      <DependentUpon>dbShoppingCart.tt</DependentUpon>
+      <DependentUpon>dbShoppingCar.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tOrder.cs">
-      <DependentUpon>dbShoppingCart.tt</DependentUpon>
+      <DependentUpon>dbShoppingCar.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tOrderDetail.cs">
-      <DependentUpon>dbShoppingCart.tt</DependentUpon>
+      <DependentUpon>dbShoppingCar.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tProduct.cs">
-      <DependentUpon>dbShoppingCart.tt</DependentUpon>
+      <DependentUpon>dbShoppingCar.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -182,6 +182,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\MyCart.cshtml" />
+    <Content Include="Views\Home\Order.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

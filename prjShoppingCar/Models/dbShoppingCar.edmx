@@ -31,7 +31,7 @@
           </Key>
           <Property Name="fId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fOrderGuid" Type="nvarchar" MaxLength="50" />
-          <Property Name="fUserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="fPrice" Type="int" />
           <Property Name="fPId" Type="nvarchar" MaxLength="50" />
           <Property Name="fQty" Type="int" />
         </EntityType>
@@ -45,6 +45,11 @@
           <Property Name="fPrice" Type="int" />
           <Property Name="fImg" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Function Name="Add_Order" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Uid" Type="nvarchar" Mode="In" />
+          <Parameter Name="Addr" Type="nvarchar" Mode="In" />
+          <Parameter Name="cart" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="dbShoppingCarModelStoreContainer">
           <EntitySet Name="tMember" EntityType="Self.tMember" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tOrder" EntityType="Self.tOrder" Schema="dbo" store:Type="Tables" />
@@ -82,7 +87,7 @@
           </Key>
           <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fOrderGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="fUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fPrice" Type="Int32" />
           <Property Name="fPId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fQty" Type="Int32" />
         </EntityType>
@@ -101,6 +106,11 @@
           <EntitySet Name="tOrder" EntityType="Self.tOrder" />
           <EntitySet Name="tOrderDetail" EntityType="Self.tOrderDetail" />
           <EntitySet Name="tProduct" EntityType="Self.tProduct" />
+          <FunctionImport Name="Add_Order">
+            <Parameter Name="Uid" Mode="In" Type="String" />
+            <Parameter Name="Addr" Mode="In" Type="String" />
+            <Parameter Name="cart" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -135,7 +145,7 @@
               <MappingFragment StoreEntitySet="tOrderDetail">
                 <ScalarProperty Name="fId" ColumnName="fId" />
                 <ScalarProperty Name="fOrderGuid" ColumnName="fOrderGuid" />
-                <ScalarProperty Name="fUserId" ColumnName="fUserId" />
+                <ScalarProperty Name="fPrice" ColumnName="fPrice" />
                 <ScalarProperty Name="fPId" ColumnName="fPId" />
                 <ScalarProperty Name="fQty" ColumnName="fQty" />
               </MappingFragment>
@@ -152,6 +162,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Add_Order" FunctionName="dbShoppingCarModel.Store.Add_Order" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -16,7 +16,7 @@ namespace prjShoppingCar.Models
     {
         public int fId { get; set; }
         public string fOrderGuid { get; set; }
-        public string fUserId { get; set; }
+        public Nullable<int> fPrice { get; set; }
         public string fPId { get; set; }
         public Nullable<int> fQty { get; set; }
     }

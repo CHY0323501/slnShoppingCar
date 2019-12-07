@@ -22,7 +22,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("產品列表", "Index", "Home")</li>
+                    <li>@Html.ActionLink("我的購物車", "MyCart", "Home")</li>
+                    <li>@Html.ActionLink("我要結帳", "Order", "Home")</li>
                     <li>@Html.ActionLink("登出", "Logout", "Home")</li>
+                    <li><a href="#">@Session["Welcome"]</a></li>
                   </ul>
             </div>
         </div>
@@ -38,5 +41,6 @@
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("script",false)
 </body>
 </html>

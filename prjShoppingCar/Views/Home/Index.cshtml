@@ -42,7 +42,33 @@
             cart = JSON.parse(localStorage.getItem('cart'));
         }
         $('.add_cart').click(function () {
-            let product = $(this).closest('.thumbnail')
+            let product = $(this).closest('.thumbnail');
+            //用來比對是否已存在於購物車，若已存在更新購物車、不存在時則新增
+            let newPid = product.find('.fPId').val();
+            let amount = parseInt(product.find('.amount').val());
+            let oldPid;
+            if (cart.length > 0) {
+                for (var i = 0; i < cart.length; i++) {
+                    oldPid = cart[i]["fPId"];
+                    if (newPid == oldPid) {
+                        //已存在時直接更新數量
+                        cart[i]["amount"] = amount;
+                        alert("商品數量已更新");
+                        break;
+                    }
+                    else if (i == cart.length - 1) {
+                        add_car(product);
+                        break;
+                    }
+                }
+            } else {
+                add_car(product);
+            }
+            
+            localStorage.setItem("cart", JSON.stringify(cart));
+        })
+
+        function add_car(product) {
             let newItem = {
                 Pname: product.find('.title').text(),
                 Price: parseInt(product.find('.fPrice').text()),
@@ -53,7 +79,7 @@
             console.log(newItem);
 
             cart.push(newItem);
-            localStorage.setItem("cart", JSON.stringify(cart));
-        })
+            alert("商品已加入購物車");
+        }
     </script>
 }
